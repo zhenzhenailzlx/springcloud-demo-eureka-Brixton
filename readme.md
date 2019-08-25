@@ -16,16 +16,77 @@ public class Application {
 
 }
 
-3.访问
+3.配置application.yml 独立模式
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      
+4.配置application.yml 对等模式
+
+---
+spring:
+  profiles: peer1
+eureka:
+  instance:
+    hostname: peer1
+  client:
+    serviceUrl:
+      defaultZone: http://peer2/eureka/
+
+---
+spring:
+  profiles: peer2
+eureka:
+  instance:
+    hostname: peer2
+  client:
+    serviceUrl:
+      defaultZone: http://peer1/eureka/
+      
+5.高可用模式
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://peer1/eureka/,http://peer2/eureka/,http://peer3/eureka/
+
+---
+spring:
+  profiles: peer1
+eureka:
+  instance:
+    hostname: peer1
+
+---
+spring:
+  profiles: peer2
+eureka:
+  instance:
+    hostname: peer2
+
+---
+spring:
+  profiles: peer3
+eureka:
+  instance:
+    hostname: peer3
+
+6.首选ip地址 Prefer IP Address
+eureka:
+  instance:
+    prefer-ip-address: true
+
+6.访问
 http://localhost:8761
 
-4.注册地址
+7.注册地址
 http://localhost:8761/eureka/
 
-
-5.新建git项目
-git init
-git add 。
-git commit -m "init project"
-git remote add origin https://github.com/zhenzhenailzlx/springcloud-demo-eureka-Brixton.git
-git push -u origin master
