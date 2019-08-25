@@ -1,92 +1,98 @@
-示例eureka服务器（例如，使用spring-cloud-starter-eureka-server设置类路径）：
-1.pom文件添加依赖
-<dependency>
-	<groupId>org.springframework.cloud</groupId>
-	<artifactId>spring-cloud-starter-eureka-server</artifactId>
-</dependency>
+## 1.pom文件添加依赖
 
-2.使用@EnableEurekaServer注解
-@SpringBootApplication
-@EnableEurekaServer
-public class Application {
+    <dependency>
+    	<groupId>org.springframework.cloud</groupId>
+    	<artifactId>spring-cloud-starter-eureka-server</artifactId>
+    </dependency>
 
-    public static void main(String[] args) {
-        new SpringApplicationBuilder(Application.class).web(true).run(args);
+## 2.使用@EnableEurekaServer注解
+
+    @SpringBootApplication
+    @EnableEurekaServer
+    public class Application {
+    
+        public static void main(String[] args) {
+            new SpringApplicationBuilder(Application.class).web(true).run(args);
+        }
+    
     }
 
-}
+## 3.配置application.yml 独立模式
 
-3.配置application.yml 独立模式
-server:
-  port: 8761
-
-eureka:
-  instance:
-    hostname: localhost
-  client:
-    registerWithEureka: false
-    fetchRegistry: false
-    serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    server:
+      port: 8761
+    
+    eureka:
+      instance:
+        hostname: localhost
+      client:
+        registerWithEureka: false
+        fetchRegistry: false
+        serviceUrl:
+          defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
       
-4.配置application.yml 对等模式
 
----
-spring:
-  profiles: peer1
-eureka:
-  instance:
-    hostname: peer1
-  client:
-    serviceUrl:
-      defaultZone: http://peer2/eureka/
+## 4.配置application.yml 对等模式
 
----
-spring:
-  profiles: peer2
-eureka:
-  instance:
-    hostname: peer2
-  client:
-    serviceUrl:
-      defaultZone: http://peer1/eureka/
+    ---
+    spring:
+      profiles: peer1
+    eureka:
+      instance:
+        hostname: peer1
+      client:
+        serviceUrl:
+          defaultZone: http://peer2/eureka/
+    
+    ---
+    spring:
+      profiles: peer2
+    eureka:
+      instance:
+        hostname: peer2
+      client:
+        serviceUrl:
+          defaultZone: http://peer1/eureka/
       
-5.高可用模式
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://peer1/eureka/,http://peer2/eureka/,http://peer3/eureka/
+## 5.高可用模式
 
----
-spring:
-  profiles: peer1
-eureka:
-  instance:
-    hostname: peer1
+    eureka:
+      client:
+        serviceUrl:
+          defaultZone: http://peer1/eureka/,http://peer2/eureka/,http://peer3/eureka/
+    
+    ---
+    spring:
+      profiles: peer1
+    eureka:
+      instance:
+        hostname: peer1
+    
+    ---
+    spring:
+      profiles: peer2
+    eureka:
+      instance:
+        hostname: peer2
+    
+    ---
+    spring:
+      profiles: peer3
+    eureka:
+      instance:
+        hostname: peer3
 
----
-spring:
-  profiles: peer2
-eureka:
-  instance:
-    hostname: peer2
+## 6.首选ip地址 Prefer IP Address
 
----
-spring:
-  profiles: peer3
-eureka:
-  instance:
-    hostname: peer3
+    eureka:
+      instance:
+        prefer-ip-address: true
 
-6.首选ip地址 Prefer IP Address
-eureka:
-  instance:
-    prefer-ip-address: true
+7.访问
 
-6.访问
-http://localhost:8761
+    http://localhost:8761
 
-7.注册地址
-http://localhost:8761/eureka/
+## 8.注册地址
 
+    http://localhost:8761/eureka/
