@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.zhenzhen.demo</groupId>
-	<artifactId>demo-springcloud-eureka</artifactId>
+	<artifactId>springcloud-demo-eureka-Brixton</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>springcloud-demo-eureka</name>
+	<name>springcloud-demo-eureka-Brixton</name>
 	<description>demo-springcloud-eureka</description>
 
 	<properties>
