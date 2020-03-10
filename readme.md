@@ -96,3 +96,16 @@
 ## 8.注册地址
 
     http://localhost:8761/eureka/
+    
+    
+## 9.启动脚本
+
+	java -jar eureka.jar 
+
+	java -jar eureka.jar --spring.profiles.active=peer1
+	java -jar eureka.jar --spring.profiles.active=peer2
+
+	java -jar eureka.jar --spring.profiles.active=eureka0
+	java -jar eureka.jar --spring.profiles.active=eureka1
+	java -jar eureka.jar --spring.profiles.active=eureka2
+    
