@@ -12,15 +12,6 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 public class EurekaApplication {
 
 	public static void main(String[] args) {
-		
-		Map map = new LinkedHashMap();
-		
-		System.out.println("-----sun.boot.class.path"+System.getProperty("sun.boot.class.path"));
-		
-		System.out.println("-----java.ext.dirs"+System.getProperty("java.ext.dirs"));
-		
-		System.out.println("-----java.class.path"+System.getProperty("java.class.path"));	
-		
 		 new SpringApplicationBuilder(EurekaApplication.class).web(true).run(args);
 	}
 
