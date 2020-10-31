@@ -8,6 +8,8 @@ eureka:
   instance:
     appname: ${spring.application.name}
     hostname: eureka2
+  server:
+    enableSelfPreservation: false
   client:
     registerWithEureka: true
     fetchRegistry: true
